@@ -9,7 +9,7 @@
 import Foundation
 
 // Option 1: Method in class
-class decodeHtmlEntities: NSObject {
+class DecodeHtmlEntities: NSObject {
     
     func decodeHtml(encodedHtml: String) -> String {
         guard let data = encodedHtml.data(using: .utf8) else {
@@ -33,22 +33,22 @@ class decodeHtmlEntities: NSObject {
 
 // Option 2: Extends from String
 extension String {
-    init?(encodedHtml: String) {
+    func decodeHtml(encodedHtml: String) -> String{
         guard let data = encodedHtml.data(using: .utf8) else {
             NSLog("❗ Couldn't parse data received to UTF8")
-            return nil
+            return ""
         }
-        
+
         let options: [NSAttributedString.DocumentReadingOptionKey : Any] = [
             NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
             NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue
         ]
-        
+
         guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
             NSLog("❗ Couldn't parse data received to HTML")
-            return nil
+            return ""
         }
-        
-        self.init(attributedString.string)
+
+        return attributedString.string
     }
 }
