@@ -1,9 +1,8 @@
 //
-//  decodeHtmlEntities.swift
-//  toursgratis guias
+//  DecodeHtmlEntities.swift
 //
 //  Created by Isaac Medina on 8/3/18.
-//  Copyright © 2018 Tours Gratis. All rights reserved.
+//  Copyright © 2018 Isaac Medina. All rights reserved.
 //
 
 import Foundation
@@ -38,17 +37,17 @@ extension String {
             NSLog("❗ Couldn't parse data received to UTF8")
             return ""
         }
-
+        
         let options: [NSAttributedString.DocumentReadingOptionKey : Any] = [
             NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html,
             NSAttributedString.DocumentReadingOptionKey.characterEncoding: String.Encoding.utf8.rawValue
         ]
-
+        
         guard let attributedString = try? NSAttributedString(data: data, options: options, documentAttributes: nil) else {
             NSLog("❗ Couldn't parse data received to HTML")
             return ""
         }
-
+        
         return attributedString.string
     }
 }
